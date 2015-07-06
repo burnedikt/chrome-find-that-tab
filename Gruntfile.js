@@ -33,8 +33,8 @@ module.exports = function (grunt) {
         tasks: ['bowerInstall']
       },
       js: {
-        files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        files: ['<%= config.app %>/scripts/{,*/}*.js', '!<%= config.app %>/scripts/browserify.js'],
+        tasks: ['jshint', 'browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -113,6 +113,7 @@ module.exports = function (grunt) {
       all: [
         'Gruntfile.js',
         '<%= config.app %>/scripts/{,*/}*.js',
+        '!<%= config.app %>/scripts/browserify.js',
         '!<%= config.app %>/scripts/vendor/*',
         'test/spec/{,*/}*.js'
       ]
@@ -249,6 +250,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       chrome: [
+        'browserify'
       ],
       dist: [
         'imagemin',
@@ -291,6 +293,17 @@ module.exports = function (grunt) {
           src: ['**'],
           dest: ''
         }]
+      }
+    },
+
+    browserify: {
+      options: {
+        transform:  [ require('grunt-react').browserify ]
+      },
+      dist: {
+        files: {
+          'app/scripts/browserify.js': ['app/scripts/popup.js'],
+        }
       }
     }
   });
