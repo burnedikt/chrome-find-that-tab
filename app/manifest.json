@@ -11,8 +11,6 @@
   "background": {
     "scripts": [
       "scripts/chromereload.js",
-      "scripts/background.js"
-    ]
   },
   "permissions": [
     "tabs",
