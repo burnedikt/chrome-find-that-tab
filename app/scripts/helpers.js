@@ -5,7 +5,16 @@ var q = require('q');
 
 function _createTypeAheadRegex(input) {
   // case-insensitive and global regex
-  return new RegExp(input.split('').join('.*'), 'gi');
+  var chars = input.split('');
+  var regex = '';
+  if (chars.length) {
+    for (var i = 0; i < chars.length - 1; i++) {
+      regex += '(' + chars[i] + ')[^' + chars[i + 1] + ']*';
+    }
+    regex += '(' + chars[chars.length - 1] + ')';
+  }
+  console.log(regex);
+  return new RegExp(regex, 'i');
 }
 
 module.exports = {
@@ -47,11 +56,23 @@ module.exports = {
       // check title if there wasn'a match yet
       titleMatch = tabs[i].title.match(regex);
       // if we found anything, put it to the stack
-      if (urlMatch||titleMatch) {
-        console.log(urlMatch, titleMatch);
+      if ((false && urlMatch) || titleMatch) {
+        console.log(titleMatch);
+        tabs[i]._regExpMatch = titleMatch;
         matches.push(tabs[i]);
       }
     }
+
+    // before returning the matches, sort them by the length of the matched string
+    // shortest match = best match
+    matches = matches.sort(function compareFunction(a, b) {
+      var comparator = a._regExpMatch[0].length - b._regExpMatch[0].length;
+      // if comparator is 0, take another condition, else return the comparator
+      if (!comparator) {
+        return (a._regExpMatch.index - b._regExpMatch.index);
+      }
+      return comparator;
+    });
 
     console.log(matches);
 
