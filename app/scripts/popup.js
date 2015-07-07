@@ -10,6 +10,7 @@ var React = require('react');
 
 const KEY_DOWN = 40;
 const KEY_UP = 38;
+const KEY_RETURN = 13;
 
 
 /*jshint ignore:start */
@@ -50,13 +51,6 @@ var TabAheadrInput = React.createClass({
   handleInput: function(e) {
     this.props.onInputChange(e.target.value);
   },
-  handleKeydown: function(e) {
-    if (e.keyCode === KEY_DOWN) {
-      console.log('downing');
-    } else if (e.keyCode === KEY_UP) {
-      console.log('upping');
-    }
-  },
   render: function() {
     return (
       <input type="text" id="tabTypeAheadInput" className="" onInput={this.handleInput} onKeydown={this.handleKeydown} autofocus="true" />
@@ -66,17 +60,47 @@ var TabAheadrInput = React.createClass({
 
 var TabAheadr = React.createClass({
   getInitialState: function() {
-    return {tabs: []};
+    return {
+      tabs: [],
+      _tabs: [],
+      activeTabIdx: 0
+    };
   },
   componentDidMount: function() {
-    this.loadTabs();
+    // load all currently open tabs, as soon as the popup is loaded
+    this.loadTabs().finally(function() {
+      console.log('lalala');
+      // also make sure to listen on keydown events for navigation, as soon as we have all tabs
+      // we need arrows for navigation and return to confirm
+      document.body.addEventListener('keydown', this.handleKeydownEvent);
+    }.bind(this));
+  },
+  handleKeydownEvent: function(e) {
+    if (e.keyCode === KEY_DOWN) {
+      // prevent scrolling
+      e.preventDefault();
+      // switch to next tab in list (if there is any)
+      this._highlightTabAtIndex(this.state.activeTabIdx + 1);
+      console.log('downing');
+    } else if (e.keyCode === KEY_UP) {
+      // prevent scrolling
+      e.preventDefault();
+      this._highlightTabAtIndex(this.state.activeTabIdx - 1);
+      console.log('upping');
+    } else if (e.keyCode === KEY_RETURN) {
+      // switch to selected tab
+      helpers.switchToTab(this.state.tabs[this.state.activeTabIdx]);
+    }
   },
   loadTabs: function() {
-    helpers.loadTabs().then(function(tabs) {
+    return helpers.loadTabs().then(function(tabs) {
+      // store initial tabs and current tabs
       this.setState({
         _tabs: tabs,
+        tabs: tabs
       });
-      this._updateTabs(tabs);
+      // highlight first tab per default
+      this._highlightTabAtIndex(0);
     }.bind(this));
   },
   handleInputChange: function(keyword) {
@@ -86,19 +110,37 @@ var TabAheadr = React.createClass({
     this._updateTabs(tabs);
   },
   _updateTabs: function(newTabs) {
-    if (newTabs.length) {
-      newTabs[0]._active = true;
-    }
     this.setState({
       tabs: newTabs
     });
   },
+  _highlightTabAtIndex: function(idx) {
+    // index sanitization
+    if (idx >= this.state.tabs.length) {
+      idx = 0;
+    } else if (idx < 0) {
+      idx = this.state.tabs.length - 1;
+    }
+    // get a reference to the currently stored tab list
+    var _tabs = this.state.tabs;
+    // unhighlight the currently active / highlighted tab
+    _tabs[this.state.activeTabIdx]._active = false;
+    // highlight the newly selected one
+    _tabs[idx]._active = true;
+    // update the state with the new data
+    this._updateTabs(_tabs, idx);
+    // store the newly selected index
+    this.setState({
+      activeTabIdx: idx
+    });
+  },
   render: function() {
+    var title = 'Tab TypeAheadr';
     return (
       <div className="container">
         <div className="row">
           <div className="col s12">
-            <h1>Tab TypeAheadr</h1>
+            <h4>{title}</h4>
           </div>
         </div>
         <div className="row">
