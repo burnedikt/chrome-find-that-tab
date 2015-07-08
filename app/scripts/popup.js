@@ -28,7 +28,7 @@ var Tab = React.createClass({
       <li href="#!" className={classes}>
         <img src={this.props.data.favIconUrl} alt="" className="circle" />
         <span className="title" dangerouslySetInnerHTML={{__html: (this.props.data.displayTitle||this.props.data.title)}} />
-        <p>{this.props.data.url}</p>
+        <p className="truncate">{this.props.data.url}</p>
       </li>
     );
   }
@@ -38,11 +38,11 @@ var TabList = React.createClass({
   render: function() {
     var tabNodes = this.props.tabs.map(function(tab) {
       return (
-        <Tab data={tab} />
+        <Tab key={tab.id} data={tab} />
       );
     });
     return (
-      <ul className="collection red">
+      <ul className="collection">
         {tabNodes}
       </ul>
     );
@@ -140,14 +140,8 @@ var TabAheadr = React.createClass({
     });
   },
   render: function() {
-    var title = 'Tab TypeAheadr';
     return (
       <div className="container">
-        <div className="row">
-          <div className="col s12">
-            <h4>{title}</h4>
-          </div>
-        </div>
         <div className="row">
           <div className="col s12">
             <TabAheadrInput onInputChange={this.handleInputChange} />
