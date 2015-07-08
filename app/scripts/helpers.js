@@ -15,7 +15,7 @@ function _createTypeAheadRegex(input) {
   }
   return new RegExp(regex, 'i');
 }
-
+  
 module.exports = {
   switchToTab: function(tab) {
     chrome.tabs.highlight({
@@ -65,15 +65,24 @@ module.exports = {
         tabs[i]._regExpMatch = titleMatch;
 
         var _highlightPlease = Array.prototype.slice.call(titleMatch, 1);
-        // highlight all the matched chars
-        var tempTitle = tabs[i].title;
-        for (var j = _highlightPlease.length - 1; j >= 0; j--) {
-          tempTitle = tempTitle.replace(_highlightPlease[j], '**$&**');
+        // highlight all the matched chars in the matched substring
+        var tempTitle = titleMatch[0];
+        var tempRegex;
+        for (var j = 0; j < _highlightPlease.length; j++) {
+          // create the regex for this char
+          tempRegex = new RegExp(_highlightPlease[j]  + '(?!\\*\\*)');
+          // replace the char with it's highlighted version (use *'s for the highlithing)
+          tempTitle = tempTitle.replace(tempRegex, '**$&**');
         }
         // finally replace all '**'s by <strong> blocks
-        tempTitle = tempTitle.replace(/\*\*([^\*]*)\*\*/gi, replacer);
-        tabs[i].displayTitle = tempTitle;
-
+        tempTitle = tempTitle.replace(/\*\*([^\*])\*\*/gi, replacer);
+        // now insert the modified, highlighted string into the whole title and save it
+        var newTitle = tabs[i].title.split('');
+        // use splice to insert the highlighted string into the array while removing the old stuff
+        newTitle.splice(titleMatch.index, titleMatch[0].length, tempTitle);
+        // finally save the recreated string
+        tabs[i].displayTitle = newTitle.join('');
+        // and save the match
         matches.push(tabs[i]);
       }
     }
