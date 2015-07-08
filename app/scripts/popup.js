@@ -7,6 +7,8 @@ var helpers = require('./helpers.js');
 // ReactJS for Rendering
 // jshint unused:false
 var React = require('react');
+// promises baby
+var q = require('q');
 
 const KEY_DOWN = 40;
 const KEY_UP = 38;
@@ -25,7 +27,7 @@ var Tab = React.createClass({
     return (
       <li href="#!" className={classes}>
         <img src={this.props.data.favIconUrl} alt="" className="circle" />
-        <span className="title">{this.props.data.title}</span>
+        <span className="title" dangerouslySetInnerHTML={{__html: (this.props.data.displayTitle||this.props.data.title)}} />
         <p>{this.props.data.url}</p>
       </li>
     );
@@ -69,7 +71,6 @@ var TabAheadr = React.createClass({
   componentDidMount: function() {
     // load all currently open tabs, as soon as the popup is loaded
     this.loadTabs().finally(function() {
-      console.log('lalala');
       // also make sure to listen on keydown events for navigation, as soon as we have all tabs
       // we need arrows for navigation and return to confirm
       document.body.addEventListener('keydown', this.handleKeydownEvent);
@@ -81,12 +82,10 @@ var TabAheadr = React.createClass({
       e.preventDefault();
       // switch to next tab in list (if there is any)
       this._highlightTabAtIndex(this.state.activeTabIdx + 1);
-      console.log('downing');
     } else if (e.keyCode === KEY_UP) {
       // prevent scrolling
       e.preventDefault();
       this._highlightTabAtIndex(this.state.activeTabIdx - 1);
-      console.log('upping');
     } else if (e.keyCode === KEY_RETURN) {
       // switch to selected tab
       helpers.switchToTab(this.state.tabs[this.state.activeTabIdx]);
@@ -105,14 +104,20 @@ var TabAheadr = React.createClass({
   },
   handleInputChange: function(keyword) {
     var tabs = helpers.findMatchingTabs(keyword, this.state._tabs);
-    // highlight the first tab
     // set the tabs
-    this._updateTabs(tabs);
+    this._updateTabs(tabs).then(function() {
+      // highlight first tab per default
+      this._highlightTabAtIndex(0);
+    }.bind(this));
   },
   _updateTabs: function(newTabs) {
+    var deferred = q.defer();
     this.setState({
       tabs: newTabs
+    }, function() {
+      deferred.resolve();
     });
+    return deferred.promise;
   },
   _highlightTabAtIndex: function(idx) {
     // index sanitization
@@ -128,9 +133,9 @@ var TabAheadr = React.createClass({
     // highlight the newly selected one
     _tabs[idx]._active = true;
     // update the state with the new data
-    this._updateTabs(_tabs, idx);
     // store the newly selected index
     this.setState({
+      tabs: _tabs,
       activeTabIdx: idx
     });
   },
@@ -168,7 +173,6 @@ var TabAheadr = React.createClass({
 var searchableData = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM fully loaded and parsed');
   /*jshint ignore:start */
   // render the whole shit
   React.render(

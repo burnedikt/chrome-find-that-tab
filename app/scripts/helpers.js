@@ -13,7 +13,6 @@ function _createTypeAheadRegex(input) {
     }
     regex += '(' + chars[chars.length - 1] + ')';
   }
-  console.log(regex);
   return new RegExp(regex, 'i');
 }
 
@@ -50,15 +49,31 @@ module.exports = {
     var urlMatch = null;
     var titleMatch = null;
 
+    var replacer = function(match, char) {
+      return '<strong class="teal accent-1">' + char + '</strong>';
+    };
+
     for (var i = tabs.length - 1; i >= 0; i--) {
+      // unselect the tab per default
+      tabs[i]._active = false;
       // check url first
       urlMatch = tabs[i].url.match(regex);
       // check title if there wasn'a match yet
       titleMatch = tabs[i].title.match(regex);
       // if we found anything, put it to the stack
       if ((false && urlMatch) || titleMatch) {
-        console.log(titleMatch);
         tabs[i]._regExpMatch = titleMatch;
+
+        var _highlightPlease = Array.prototype.slice.call(titleMatch, 1);
+        // highlight all the matched chars
+        var tempTitle = tabs[i].title;
+        for (var j = _highlightPlease.length - 1; j >= 0; j--) {
+          tempTitle = tempTitle.replace(_highlightPlease[j], '**$&**');
+        }
+        // finally replace all '**'s by <strong> blocks
+        tempTitle = tempTitle.replace(/\*\*([^\*]*)\*\*/gi, replacer);
+        tabs[i].displayTitle = tempTitle;
+
         matches.push(tabs[i]);
       }
     }
@@ -73,8 +88,6 @@ module.exports = {
       }
       return comparator;
     });
-
-    console.log(matches);
 
     return matches;
   }
