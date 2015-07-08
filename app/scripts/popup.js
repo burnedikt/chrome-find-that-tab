@@ -55,7 +55,7 @@ var TabAheadrInput = React.createClass({
   },
   render: function() {
     return (
-      <input type="text" id="tabTypeAheadInput" className="" onInput={this.handleInput} onKeydown={this.handleKeydown} autofocus="true" />
+      <input type="text" id="tabTypeAheadInput" className="validate" onInput={this.handleInput} onKeydown={this.handleKeydown} autofocus="true" />
     );
   }
 });
@@ -143,9 +143,15 @@ var TabAheadr = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col s12">
-            <TabAheadrInput onInputChange={this.handleInputChange} />
-          </div>
+          <form className="col s12">
+            <div className="row">
+              <div className="input-field col s12">
+                <i className="material-icons prefix">search</i>
+                <TabAheadrInput onInputChange={this.handleInputChange} />
+                <label htmlFor="tabTypeAheadInput">Just type ahead ...</label>
+              </div>
+            </div>
+          </form>
         </div>
         <div className="row">
           <div className="col s12">

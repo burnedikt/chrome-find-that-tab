@@ -2,10 +2,14 @@
   "name": "tab-typeaheadr",
   "version": "0.0.0",
   "dependencies": {
-    "materialize": "~0.97.0"
+    "materialize": "~0.97.0",
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
     "chai": "~3.0.0",
     "mocha": "~2.2.5"
+  },
+  "resolutions": {
+    "jquery": ">=2.1.1"
   }
 }
