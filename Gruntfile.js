@@ -43,8 +43,8 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       styles: {
-        files: ['<%= config.app %>/styles/{,*/}*.css'],
-        tasks: [],
+        files: ['<%= config.app %>/styles/{,*/}*.scss'],
+        tasks: ['sass'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -133,6 +133,20 @@ module.exports = function (grunt) {
         src: [
           '<%= config.app %>/*.html'
         ]
+      }
+    },
+
+    sass: {
+      options: {
+        sourceMap: true,
+        includePaths: [
+          '<%= config.app %>/bower_components'
+        ]
+      },
+      server: {
+        files: {
+          '<%= config.app %>/styles/main.css': '<%= config.app %>/styles/main.scss'
+        }
       }
     },
 
@@ -250,9 +264,11 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       chrome: [
-        'browserify'
+        'browserify',
+        'sass'
       ],
       dist: [
+        'sass',
         'imagemin',
         'svgmin'
       ],

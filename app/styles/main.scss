@@ -1,0 +1,66 @@
+// load materialize
+@charset "UTF-8";
+
+// Mixins
+@import "materialize/sass/components/prefixer";
+@import "materialize/sass/components/mixins";
+@import "materialize/sass/components/color";
+
+// get local variables
+@import "variables";
+
+// Reset
+@import "materialize/sass/components/normalize";
+
+// components
+@import "materialize/sass/components/global";
+@import "materialize/sass/components/icons-material-design";
+@import "materialize/sass/components/grid";
+@import "materialize/sass/components/navbar";
+@import "materialize/sass/components/roboto";
+@import "materialize/sass/components/typography";
+@import "materialize/sass/components/cards";
+@import "materialize/sass/components/tabs";
+@import "materialize/sass/components/tooltip";
+@import "materialize/sass/components/buttons";
+@import "materialize/sass/components/dropdown";
+@import "materialize/sass/components/waves";
+@import "materialize/sass/components/collapsible";
+@import "materialize/sass/components/materialbox";
+@import "materialize/sass/components/form";
+@import "materialize/sass/components/table_of_contents";
+@import "materialize/sass/components/preloader";
+
+// actual styles
+
+body {
+  height: 400px;
+  width: 800px;
+  overflow: hidden;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.collection {
+  max-height: 300px;
+}
+
+.collection-item {
+  @extend .black-text;
+
+  strong {
+    font-weight: bold;
+  }
+
+  &.active {
+    strong {
+      font-weight: bold;
+      @extend .white-text;
+    }
+  }
+}

@@ -25,6 +25,7 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-mocha": "~0.4.10",
     "grunt-react": "^0.12.2",
+    "grunt-sass": "^1.0.0",
     "grunt-svgmin": "~0.4.0",
     "grunt-usemin": "~2.1.0",
     "jshint-stylish": "~0.1.5",

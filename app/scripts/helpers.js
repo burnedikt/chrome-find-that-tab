@@ -50,7 +50,7 @@ module.exports = {
     var titleMatch = null;
 
     var replacer = function(match, char) {
-      return '<strong class="teal accent-1">' + char + '</strong>';
+      return '<strong>' + char + '</strong>';
     };
 
     for (var i = tabs.length - 1; i >= 0; i--) {
