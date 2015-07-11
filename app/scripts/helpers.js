@@ -15,7 +15,7 @@ function _createTypeAheadRegex(input) {
   }
   return new RegExp(regex, 'i');
 }
-  
+
 module.exports = {
   switchToTab: function(tab) {
     chrome.tabs.highlight({
