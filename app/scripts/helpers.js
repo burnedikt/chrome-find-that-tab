@@ -17,12 +17,18 @@ function _createTypeAheadRegex(input) {
 }
 
 module.exports = {
-  switchToTab: function(tab) {
+  switchToTab: function(tab, cb) {
+    // make sure cb function is a function ...
+    if (typeof cb !== 'function') {
+      cb = function(){};
+    }
     chrome.tabs.highlight({
       windowId: tab.windowId,
       tabs: tab.index
-    }, function() {
-      console.log('tab switched');
+    }, function(wndw) {
+      chrome.windows.update(wndw.id, {
+        focused: true
+      }, cb);
     });
   },
   loadTabs: function() {
