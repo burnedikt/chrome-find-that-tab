@@ -20,6 +20,10 @@ const KEY_ESCAPE = 27;
 
 /*jshint ignore:start */
 var Tab = React.createClass({
+  clickHandler: function(e) {
+    // forward click event on one tab item to the tab list
+    this.props.handleClick(e, this.props.data);
+  },
   render: function() {
     var classes = classNames({
       tab: true,
@@ -28,7 +32,7 @@ var Tab = React.createClass({
       active: this.props.data._active
     });
     return (
-      <li href="#!" className={classes}>
+      <li href="#!" className={classes} onClick={this.clickHandler}>
         <img src={this.props.data.favIconUrl} alt="" className="circle" />
         <span className="title" dangerouslySetInnerHTML={{__html: (this.props.data.displayTitle||this.props.data.title)}} />
         <p className="truncate">{this.props.data.url}</p>
@@ -38,12 +42,16 @@ var Tab = React.createClass({
 });
 
 var TabList = React.createClass({
+  handleClick: function(e, tabData) {
+    // forward the click event from any tab item to the parent application
+    this.props.handleItemClick(e, tabData);
+  },
   render: function() {
     var tabNodes = this.props.tabs.map(function(tab) {
       return (
-        <Tab key={tab.id} data={tab} />
+        <Tab key={tab.id} data={tab} handleClick={this.handleClick} />
       );
-    });
+    }.bind(this));
     return (
       <ul className="collection">
         {tabNodes}
@@ -58,7 +66,7 @@ var OpenAnyTabInput = React.createClass({
   },
   render: function() {
     return (
-      <input type="text" id="tabTypeAheadInput" className="validate" onInput={this.handleInput} onKeydown={this.handleKeydown} autoFocus />
+      <input type="text" id="tabTypeAheadInput" className="validate" onInput={this.handleInput} autoFocus />
     );
   }
 });
@@ -92,8 +100,11 @@ var OpenAnyTab = React.createClass({
     }
   },
   handleSubmit: function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e.nativeEvent) {
+      // only try to stop the event from bubbling and triggering default actions if there is a matching native event
+      e.preventDefault();
+      e.stopPropagation();
+    }
     helpers.switchToTab(this.state.tabs[this.state.activeTabIdx], helpers.closePopup);
   },
   loadTabs: function() {
@@ -124,7 +135,10 @@ var OpenAnyTab = React.createClass({
     });
     return deferred.promise;
   },
-  _highlightTabAtIndex: function(idx) {
+  _highlightTabAtIndex: function(idx, cb) {
+    if (typeof cb !== 'function') {
+      cb = function() {};
+    }
     // index sanitization
     if (idx >= this.state.tabs.length) {
       idx = 0;
@@ -142,7 +156,15 @@ var OpenAnyTab = React.createClass({
     this.setState({
       tabs: _tabs,
       activeTabIdx: idx
-    });
+    }, cb);
+  },
+  handleItemClick: function(e, tabData) {
+    // determine index of clicked element
+    var idx = this.state.tabs.indexOf(tabData);
+    this._highlightTabAtIndex(idx, function() {
+      // highlight this item and do a submit
+      this.handleSubmit(e);
+    }.bind(this));
   },
   render: function() {
     return (
@@ -160,7 +182,7 @@ var OpenAnyTab = React.createClass({
         </div>
         <div className="row">
           <div className="col s12">
-            <TabList tabs={this.state.tabs} />
+            <TabList tabs={this.state.tabs} handleItemClick={this.handleItemClick}/>
           </div>
         </div>
       </div>
