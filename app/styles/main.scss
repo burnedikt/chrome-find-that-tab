@@ -41,11 +41,10 @@
 // actual styles
 
 body {
-  height: 400px;
-  width: 800px;
   overflow: hidden;
   display: flex;
   min-height: 100vh;
+  min-width: 100vh;
   flex-direction: column;
 }
 
@@ -55,6 +54,10 @@ main {
 
 .collection {
   max-height: 300px;
+
+  .collection-item.avatar {
+    min-height: initial;
+  }
 }
 
 .collection-item {
