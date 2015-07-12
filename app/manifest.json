@@ -15,15 +15,25 @@
   },
   "background": {
     "scripts": [
-      "scripts/chromereload.js"
-    ]
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
   },
   "commands": {
-    "_execute_browser_action": {
+    "open-anytab": {
       "suggested_key": {
-        "default": "Ctrl+Shift+P"
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
       },
       "description": "Open GoToAnything / Tab Type Ahead'r"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Activate the extension"
     }
   },
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",

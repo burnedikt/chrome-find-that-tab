@@ -10,10 +10,13 @@ var React = require('react');
 // promises baby
 var q = require('q');
 
+///////////////////////////////////
+// Key codes for various buttons //
+///////////////////////////////////
 const KEY_DOWN = 40;
 const KEY_UP = 38;
 const KEY_RETURN = 13;
-
+const KEY_ESCAPE = 27;
 
 /*jshint ignore:start */
 var Tab = React.createClass({
@@ -180,4 +183,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('output')
   );
   /*jshint ignore:end */
+});
+
+// bind a listener to the escape key to be able to always close the popup directly
+// this behavior is already default for the browser action so we'll only do it for the popup solution
+document.body.addEventListener('keydown', function keydownEvent(e) {
+  if (e.keyCode === KEY_ESCAPE) {
+    console.log('escape');
+    // get the popup
+    chrome.windows.getLastFocused(function callback(wndw) {
+      console.info(wndw);
+      // close the popup, but only if it is one
+      if (wndw.type === 'popup') {
+        // unfocus the window and the BG script will close it automatically
+        helpers.closePopup();
+      }
+    });
+  }
 });

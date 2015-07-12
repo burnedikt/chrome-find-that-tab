@@ -99,5 +99,6 @@ module.exports = {
     });
 
     return matches;
-  }
+  },
+  closePopup: chrome.extension.getBackgroundPage().closePopup
 };
