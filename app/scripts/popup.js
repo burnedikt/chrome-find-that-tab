@@ -52,18 +52,18 @@ var TabList = React.createClass({
   }
 });
 
-var TabAheadrInput = React.createClass({
+var OpenAnyTabInput = React.createClass({
   handleInput: function(e) {
     this.props.onInputChange(e.target.value);
   },
   render: function() {
     return (
-      <input type="text" id="tabTypeAheadInput" className="validate" onInput={this.handleInput} onKeydown={this.handleKeydown} autofocus="true" />
+      <input type="text" id="tabTypeAheadInput" className="validate" onInput={this.handleInput} onKeydown={this.handleKeydown} autoFocus />
     );
   }
 });
 
-var TabAheadr = React.createClass({
+var OpenAnyTab = React.createClass({
   getInitialState: function() {
     return {
       tabs: [],
@@ -89,10 +89,12 @@ var TabAheadr = React.createClass({
       // prevent scrolling
       e.preventDefault();
       this._highlightTabAtIndex(this.state.activeTabIdx - 1);
-    } else if (e.keyCode === KEY_RETURN) {
-      // switch to selected tab
-      helpers.switchToTab(this.state.tabs[this.state.activeTabIdx]);
     }
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    helpers.switchToTab(this.state.tabs[this.state.activeTabIdx], helpers.closePopup);
   },
   loadTabs: function() {
     return helpers.loadTabs().then(function(tabs) {
@@ -146,11 +148,11 @@ var TabAheadr = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <form className="col s12">
+          <form className="col s12" onSubmit={this.handleSubmit} >
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">search</i>
-                <TabAheadrInput onInputChange={this.handleInputChange} />
+                <OpenAnyTabInput onInputChange={this.handleInputChange} />
                 <label htmlFor="tabTypeAheadInput">Just type ahead ...</label>
               </div>
             </div>
@@ -179,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
   /*jshint ignore:start */
   // render the whole shit
   React.render(
-    <TabAheadr />,
+    <OpenAnyTab />,
     document.getElementById('output')
   );
   /*jshint ignore:end */
