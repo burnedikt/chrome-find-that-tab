@@ -18,6 +18,12 @@ const KEY_UP = 38;
 const KEY_RETURN = 13;
 const KEY_ESCAPE = 27;
 
+//////////////////////
+// layout variables //
+//////////////////////
+const TAB_ITEM_HEIGHT = 63;
+const COLLECTION_HEIGHT = 298;
+
 /*jshint ignore:start */
 var Tab = React.createClass({
   clickHandler: function(e) {
@@ -34,7 +40,7 @@ var Tab = React.createClass({
     return (
       <li href="#!" className={classes} onClick={this.clickHandler}>
         <img src={this.props.data.favIconUrl} alt="" className="circle" />
-        <span className="title" dangerouslySetInnerHTML={{__html: (this.props.data.displayTitle||this.props.data.title)}} />
+        <span className="title truncate" dangerouslySetInnerHTML={{__html: (this.props.data.displayTitle||this.props.data.title)}} />
         <p className="truncate">{this.props.data.url}</p>
       </li>
     );
@@ -86,6 +92,8 @@ var OpenAnyTab = React.createClass({
       // we need arrows for navigation and return to confirm
       document.body.addEventListener('keydown', this.handleKeydownEvent);
     }.bind(this));
+    // find the actual dom node of the tab list
+    this._tablistDOMNode = this.refs.tablist.getDOMNode();
   },
   handleKeydownEvent: function(e) {
     if (e.keyCode === KEY_DOWN) {
@@ -156,7 +164,12 @@ var OpenAnyTab = React.createClass({
     this.setState({
       tabs: _tabs,
       activeTabIdx: idx
-    }, cb);
+    }, function() {
+      // make sure to keep the highlighted tab in the visible bounds
+      this._tablistDOMNode.scrollTop = (idx + 1) * TAB_ITEM_HEIGHT - COLLECTION_HEIGHT;
+      // finally execute the callback
+      cb();
+    }.bind(this));
   },
   handleItemClick: function(e, tabData) {
     // determine index of clicked element
@@ -182,7 +195,7 @@ var OpenAnyTab = React.createClass({
         </div>
         <div className="row">
           <div className="col s12">
-            <TabList tabs={this.state.tabs} handleItemClick={this.handleItemClick}/>
+            <TabList ref="tablist" tabs={this.state.tabs} handleItemClick={this.handleItemClick}/>
           </div>
         </div>
       </div>

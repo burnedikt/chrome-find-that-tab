@@ -54,6 +54,7 @@ main {
 
 .collection {
   max-height: 300px;
+  overflow: auto;
 
   .collection-item.avatar {
     min-height: initial;
