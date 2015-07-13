@@ -24,7 +24,6 @@ const KEY_ESCAPE = 27;
 const TAB_ITEM_HEIGHT = 63;
 const COLLECTION_HEIGHT = 298;
 
-/*jshint ignore:start */
 var Tab = React.createClass({
   clickHandler: function(e) {
     // forward click event on one tab item to the tab list
@@ -37,6 +36,7 @@ var Tab = React.createClass({
       avatar: true,
       active: this.props.data._active
     });
+    /*jshint ignore:start */
     return (
       <li href="#!" className={classes} onClick={this.clickHandler}>
         <img src={this.props.data.favIconUrl} alt="" className="circle" />
@@ -44,6 +44,7 @@ var Tab = React.createClass({
         <p className="truncate">{this.props.data.url}</p>
       </li>
     );
+    /*jshint ignore:end */
   }
 });
 
@@ -54,15 +55,19 @@ var TabList = React.createClass({
   },
   render: function() {
     var tabNodes = this.props.tabs.map(function(tab) {
+      /*jshint ignore:start */
       return (
         <Tab key={tab.id} data={tab} handleClick={this.handleClick} />
       );
+      /*jshint ignore:end */
     }.bind(this));
+    /*jshint ignore:start */
     return (
       <ul className="collection">
         {tabNodes}
       </ul>
     );
+    /*jshint ignore:end */
   }
 });
 
@@ -71,9 +76,11 @@ var OpenAnyTabInput = React.createClass({
     this.props.onInputChange(e.target.value);
   },
   render: function() {
+    /*jshint ignore:start */
     return (
       <input type="text" id="tabTypeAheadInput" className="validate" onInput={this.handleInput} autoFocus />
     );
+    /*jshint ignore:end */
   }
 });
 
@@ -192,6 +199,7 @@ var OpenAnyTab = React.createClass({
     }.bind(this));
   },
   render: function() {
+    /*jshint ignore:start */
     return (
       <div className="container">
         <div className="row">
@@ -212,6 +220,7 @@ var OpenAnyTab = React.createClass({
         </div>
       </div>
     );
+    /*jshint ignore:end */
   }
 });
 /*jshint ignore:end */
