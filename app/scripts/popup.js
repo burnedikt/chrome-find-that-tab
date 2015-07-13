@@ -247,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // this behavior is already default for the browser action so we'll only do it for the popup solution
 document.body.addEventListener('keydown', function keydownEvent(e) {
   if (e.keyCode === KEY_ESCAPE) {
-    console.log('escape');
     // get the popup
     chrome.windows.getLastFocused(function callback(wndw) {
       console.info(wndw);
