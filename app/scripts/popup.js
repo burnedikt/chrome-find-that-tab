@@ -112,6 +112,9 @@ var OpenAnyTab = React.createClass({
       // prevent scrolling
       e.preventDefault();
       this._highlightTabAtIndex(this.state.activeTabIdx - 1);
+    } else if (e.keyCode === KEY_RETURN) {
+      // forward this event to a submit
+      this.handleSubmit(e);
     }
   },
   handleSubmit: function(e) {
