@@ -166,7 +166,19 @@ var OpenAnyTab = React.createClass({
       activeTabIdx: idx
     }, function() {
       // make sure to keep the highlighted tab in the visible bounds
-      this._tablistDOMNode.scrollTop = (idx + 1) * TAB_ITEM_HEIGHT - COLLECTION_HEIGHT;
+      var upperBorder = (idx) * TAB_ITEM_HEIGHT;
+      var lowerBorder = (idx + 1) * TAB_ITEM_HEIGHT;
+      var upperScrollBorder = this._tablistDOMNode.scrollTop;
+      var lowerScrollBorder = upperScrollBorder + COLLECTION_HEIGHT;
+      if (lowerBorder > lowerScrollBorder) {
+        // if the lower border of the current item passed the lower border of the collection, scroll down to show
+        // all of the item
+        this._tablistDOMNode.scrollTop = (idx + 1) * TAB_ITEM_HEIGHT - COLLECTION_HEIGHT;
+      } else if (upperBorder < upperScrollBorder) {
+        // if the upper border of the current item passed the upper border of the collection, scroll up a bit to show
+        // all of the item
+        this._tablistDOMNode.scrollTop = (idx) * TAB_ITEM_HEIGHT;
+      }
       // finally execute the callback
       cb();
     }.bind(this));
