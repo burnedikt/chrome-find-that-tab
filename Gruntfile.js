@@ -268,6 +268,7 @@ module.exports = function (grunt) {
         'sass'
       ],
       dist: [
+        'browserify',
         'sass',
         'imagemin',
         'svgmin'
@@ -341,8 +342,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'chromeManifest:dist',
-    'useminPrepare',
     'concurrent:dist',
+    'useminPrepare',
     'cssmin',
     'concat',
     'uglify',
