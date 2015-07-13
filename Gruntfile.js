@@ -300,7 +300,7 @@ module.exports = function (grunt) {
         options: {
           archive: function() {
             var manifest = grunt.file.readJSON('app/manifest.json');
-            return 'package/Tab Typeahead\'r-' + manifest.version + '.zip';
+            return 'package/Open-Anytab-' + manifest.version + '.zip';
           }
         },
         files: [{
