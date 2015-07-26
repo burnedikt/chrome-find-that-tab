@@ -48,7 +48,9 @@ var Tab = React.createClass({
     /*jshint ignore:start */
     return (
       <li href="#!" className={classes} onClick={this.clickHandler}>
-        <img src={this.props.data.favIconUrl} alt="" className="circle" />
+        <span className="circle">
+          <img src={this.props.data.favIconUrl} alt="" />
+        </span>
         <span className="title truncate" dangerouslySetInnerHTML={{__html: (this.props.data['highlighted-title']||this.props.data.title)}} />
         <p className="truncate" dangerouslySetInnerHTML={{__html: (this.props.data['highlighted-url']||this.props.data.url)}} />
       </li>

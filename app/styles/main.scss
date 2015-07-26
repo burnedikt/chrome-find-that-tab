@@ -8,6 +8,8 @@
 
 // get local variables
 @import "variables";
+// get global variables
+@import "materialize/sass/components/variables";
 
 // Reset
 @import "materialize/sass/components/normalize";
@@ -60,14 +62,26 @@ main {
 
   .collection-item.avatar {
     min-height: initial;
-    padding-left: 50px;
 
     .circle {
-      height: $faviconSize;
-      width: $faviconSize;
-      left: 18px;
-      border-radius: initial;
-      top: 13px;
+      // center the favicons in a circle
+      text-align: center;
+      vertical-align: middle;
+      // default color for circle
+      background-color: $collection-border-color;
+      line-height: 42px;
+
+      img {
+        height: $faviconSize;
+        width: $faviconSize;
+        vertical-align: middle;
+        font-size: 0;
+      }
+    }
+
+    &.active .circle {
+      // default color for circle
+      background-color: color("shades", "white");
     }
   }
 }
