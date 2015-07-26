@@ -3,6 +3,19 @@
 // promises baby
 var q = require('q');
 
+// mock chrome
+if (!chrome) {
+  var chrome = {
+    extension: {
+      getBackgroundPage: function () {
+        return {
+          closePopup: function () {}
+        };
+      }
+    }
+  };
+}
+
 function _createTypeAheadRegex(input) {
   // case-insensitive and global regex
   var chars = input.split('');

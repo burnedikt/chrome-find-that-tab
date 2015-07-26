@@ -3,12 +3,10 @@
   "version": "0.0.0",
   "dependencies": {
     "materialize": "~0.97.0",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "fuse.js": "~1.2.2"
   },
-  "devDependencies": {
-    "chai": "~3.0.0",
-    "mocha": "~2.2.5"
-  },
+  "devDependencies": {},
   "resolutions": {
     "jquery": ">=2.1.1"
   }

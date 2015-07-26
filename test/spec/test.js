@@ -4,10 +4,9 @@
   /* global expect */
 
   // helpers
-  // we need the chrome mock for helpers.js
-  // jshint unused:false
-  var chrome = require('chrome-mock');
   var helpers = require('../../.tmp/scripts/helpers.js');
+  // assertions
+  var expect = require('chai').expect;
 
   describe('Tab Search Algorithm', function () {
 
