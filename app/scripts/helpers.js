@@ -163,7 +163,7 @@ module.exports = function(chrome) {
       matches = matches.sort(function compareFunction(a, b) {
         // title should be more important than url
         var weights = {
-          url: 0.5,
+          url: 0.33,
           title: 1
         };
         // loop over all matches and compare their matched lengths
