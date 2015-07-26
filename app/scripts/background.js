@@ -16,9 +16,10 @@ function closePopup() {
     throw new Error('Popup isn\'t open yet and closePopup() hase been called');
   }
 }
-
+var i = 0;
 chrome.commands.onCommand.addListener(function(command) {
   if (command === 'open-anytab') {
+    window.alert('open anytab called for the ' + (i++) + 'th time');
     var width = 600;
     var height = 600;
     chrome.windows.create({

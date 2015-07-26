@@ -1,6 +1,6 @@
 {
-  "name": "tab-typeaheadr",
-  "version": "0.0.0",
+  "name": "chrome-open-anytab",
+  "version": "0.5.13",
   "dependencies": {
     "classnames": "^2.1.3",
     "q": "^1.4.1",

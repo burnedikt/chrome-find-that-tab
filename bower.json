@@ -1,6 +1,6 @@
 {
-  "name": "tab-typeaheadr",
-  "version": "0.0.0",
+  "name": "chrome-open-anytab",
+  "version": "0.5.13",
   "dependencies": {
     "materialize": "~0.97.0",
     "jquery": "~2.1.4",
