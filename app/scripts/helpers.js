@@ -192,7 +192,6 @@ module.exports = function(chrome) {
           }
           return comparator;
         }
-        console.info(firstComparator, a, b);
         return firstComparator;
       });
 
