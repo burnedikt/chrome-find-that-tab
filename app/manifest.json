@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_appName__",
-  "version": "0.0.10",
+  "version": "0.5.13",
   "author": "Benedikt Reiser",
   "description": "__MSG_appDescription__",
   "icons": {
