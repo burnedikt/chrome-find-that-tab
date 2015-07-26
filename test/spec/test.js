@@ -1,10 +1,8 @@
 (function () {
   'use strict';
 
-  /* global expect */
-
   // helpers
-  var helpers = require('../../.tmp/scripts/helpers.js');
+  var helpers = require('../../app/scripts/helpers.js');
   // assertions
   var expect = require('chai').expect;
 

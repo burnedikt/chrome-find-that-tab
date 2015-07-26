@@ -324,11 +324,6 @@ module.exports = function (grunt) {
         files: {
           'app/scripts/browserify.js': ['app/scripts/popup.js'],
         }
-      },
-      test: {
-        files: {
-          '.tmp/scripts/helpers.js': ['app/scripts/helpers.js'],
-        }
       }
     }
   });
@@ -343,7 +338,6 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'browserify:test',
     'mochaTest'
   ]);
 
