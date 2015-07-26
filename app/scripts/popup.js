@@ -6,7 +6,7 @@ var classNames = require('classnames');
 var helpers = require('./helpers.js')(chrome);
 // ReactJS for Rendering
 // jshint unused:false
-var React = require('react');
+var React = require('../bower_components/react/react.min.js');
 // promises baby
 var q = require('q');
 
