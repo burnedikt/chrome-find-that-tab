@@ -38,6 +38,9 @@
 @import "materialize/sass/components/date_picker/default.date.scss";
 @import "materialize/sass/components/date_picker/default.time.scss";
 
+// Variables
+$faviconSize: 16px;
+
 // actual styles
 
 body {
@@ -57,6 +60,15 @@ main {
 
   .collection-item.avatar {
     min-height: initial;
+    padding-left: 50px;
+
+    .circle {
+      height: $faviconSize;
+      width: $faviconSize;
+      left: 18px;
+      border-radius: initial;
+      top: 13px;
+    }
   }
 }
 
