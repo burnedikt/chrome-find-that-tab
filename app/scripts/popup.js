@@ -55,6 +55,7 @@ var Tab = React.createClass({
         </span>
         <span className="title truncate" dangerouslySetInnerHTML={{__html: (this.props.data['highlighted-title']||this.props.data.title)}} />
         <p className="truncate" dangerouslySetInnerHTML={{__html: (this.props.data['highlighted-url']||this.props.data.url)}} />
+        <a href="#!" className="secondary-content"><i className="material-icons">open_in_browser</i></a>
       </li>
     );
     /*jshint ignore:end */

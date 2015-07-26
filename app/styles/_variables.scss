@@ -3,7 +3,7 @@ $primary-color: color("indigo", "base") !default;
 $primary-color-light: color("indigo", "lighten-4") !default;
 $primary-color-dark: color("indigo", "darken-2") !default;
 
-$secondary-color: color("green", "accent-1") !default;
+$secondary-color: color("deep-orange", "accent-2") !default;
 $success-color: color("deep-orange", "accent-1") !default;
 $error-color: color("red", "base") !default;
 $link-color: color("red", "accent-2") !default;
@@ -30,6 +30,6 @@ $footer-bg-color: $primary-color !default;
 /*** Collections ***/
 $collection-border-color: #e0e0e0 !default;
 $collection-bg-color: #fff !default;
-$collection-active-bg-color: $secondary-color !default;
+$collection-active-bg-color: $primary-color-light !default;
 $collection-active-color: lighten($secondary-color, 55%) !default;
 $collection-hover-bg-color: #ddd !default;
