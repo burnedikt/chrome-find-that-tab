@@ -27,13 +27,6 @@
         "mac": "Command+Shift+P"
       },
       "description": "Open GoToAnything / Tab Type Ahead'r"
-    },
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+P",
-        "mac": "Command+Shift+P"
-      },
-      "description": "Activate the extension"
     }
   },
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
