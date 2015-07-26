@@ -49,6 +49,10 @@ module.exports = function(chrome) {
       });
       return deferredTabSwitch.promise;
     },
+    /**
+     * helper function to load all tabs via the chrome api
+     * @return {Promise} the promise which will be resolved to all opened tabs
+     */
     loadTabs: function() {
       // create a deferred object using the q-library
       var deferred = q.defer();
@@ -66,6 +70,13 @@ module.exports = function(chrome) {
       // return the promise which will be resolved
       return deferred.promise;
     },
+    /**
+     * finds all tabs that are matched by the given input keyword
+     * searches various attributes on any tab (e.g. title and url)
+     * @param  {String} keyword               the input keyword
+     * @param  {Array<chrome.tabs.Tab>} tabs  the list of tabs that should be searched
+     * @return {Array<chrome.tabs.Tab>}       the filtered list of tabs that match the actual keyword
+     */
     findMatchingTabs: function(keyword, tabs) {
       var regex = _createTypeAheadRegex(keyword);
 
@@ -120,6 +131,9 @@ module.exports = function(chrome) {
 
       return matches;
     },
+    /**
+     * helper function to close the popup
+     */
     closePopup: chrome.extension.getBackgroundPage().closePopup
   };
 };
