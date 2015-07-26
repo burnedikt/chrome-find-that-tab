@@ -3,8 +3,20 @@
 
   /* global beforeEach */
 
+
+  // mock chrome
+  var chrome = {
+    extension: {
+      getBackgroundPage: function () {
+        return {
+          closePopup: function () {}
+        };
+      }
+    }
+  };
+
   // helpers
-  var helpers = require('../../app/scripts/helpers.js');
+  var helpers = require('../../app/scripts/helpers.js')(chrome);
   // fuse
   var Fuse = require('../../app/bower_components/fuse.js/src/fuse.js');
   // assertions

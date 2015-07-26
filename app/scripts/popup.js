@@ -3,7 +3,7 @@
 // classnames
 var classNames = require('classnames');
 // helpers
-var helpers = require('./helpers.js');
+var helpers = require('./helpers.js')(chrome);
 // ReactJS for Rendering
 // jshint unused:false
 var React = require('react');
