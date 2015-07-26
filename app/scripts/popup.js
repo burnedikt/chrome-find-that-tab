@@ -40,16 +40,18 @@ var Tab = React.createClass({
   },
   render: function() {
     var classes = classNames({
+      'no-favicon': (this.props.data.favIconUrl) ? this.props.data.favIconUrl.indexOf('chrome://') === 0 : true,
       tab: true,
       'collection-item': true,
       avatar: true,
-      active: this.props.data._active
+      active: this.props.data._active,
     });
     /*jshint ignore:start */
     return (
       <li href="#!" className={classes} onClick={this.clickHandler}>
         <span className="circle">
           <img src={this.props.data.favIconUrl} alt="" />
+          <i className="material-icons">tab_unselected</i>
         </span>
         <span className="title truncate" dangerouslySetInnerHTML={{__html: (this.props.data['highlighted-title']||this.props.data.title)}} />
         <p className="truncate" dangerouslySetInnerHTML={{__html: (this.props.data['highlighted-url']||this.props.data.url)}} />

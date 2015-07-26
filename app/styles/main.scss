@@ -118,4 +118,24 @@ header {
       // @extend .white-text;
     }
   }
+
+  &.tab {
+    .circle .material-icons {
+      display: none;
+      visibility: hidden;
+    }
+
+    &.no-favicon .circle{
+      .material-icons {
+        display: inline-block;
+        vertical-align: middle;
+        visibility: visible;
+        font-size: 16px;
+      }
+      img {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
 }
