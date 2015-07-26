@@ -11,13 +11,16 @@ This extension features chrome livereload for easier and faster extension develo
 
 # Testing
 
-T.b.d.
+Right now, there are no really useful tests. Just some experiments with filtering tabs based on a fuzzy search using [Fuse](https://github.com/krisk/Fuse) or my own RegEx-based search.
+
+Simply run `grunt test`.
 
 # Building
 
-Simply run `grunt build`
+Simply run `grunt build`.
 
-# Thanks to
+# Credits
 
+Credits go to:
 - the excellent [MaterializeCSS Library](http://materializecss.com/icons.html)
 - the Chrome / Chromium Developer Team
