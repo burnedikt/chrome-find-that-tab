@@ -3,6 +3,11 @@
 // promises baby
 var q = require('q');
 
+/**
+ * helper function to create the regex which is applied to any searchable information based on the given input keyword
+ * @param  {String} input The input keyword to search for
+ * @return {RegExp}       The regular expression which can be used for searching
+ */
 function _createTypeAheadRegex(input) {
   // case-insensitive and global regex
   var chars = input.split('');
@@ -16,6 +21,14 @@ function _createTypeAheadRegex(input) {
   return new RegExp(regex, 'i');
 }
 
+/**
+ * function to highlight the given string / char
+ * @param  {String|Char} char The char / string to be highlighted
+ * @return {String}           highlighted version of the char / string
+ */
+function replacer(char) {
+  return '<strong>' + char + '</strong>';
+}
 
 module.exports = function(chrome) {
   return {
