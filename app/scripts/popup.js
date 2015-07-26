@@ -266,24 +266,30 @@ var OpenAnyTab = React.createClass({
   render: function() {
     /*jshint ignore:start */
     return (
-      <div className="container">
-        <div className="row">
-          <form className="col s12" onSubmit={this.submitHandler} >
+      <section>
+        <header className="z-depth-1">
+          <div className="container">
             <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">search</i>
-                <OpenAnyTabInput onInputChange={this.inputChangeHandler} />
-                <label htmlFor="tabTypeAheadInput">Just type ahead ...</label>
-              </div>
+              <form className="col s12" onSubmit={this.submitHandler} >
+                <div className="row">
+                  <div className="input-field col s12">
+                    <i className="material-icons prefix">search</i>
+                    <OpenAnyTabInput onInputChange={this.inputChangeHandler} />
+                    <label htmlFor="tabTypeAheadInput">Just type ahead ...</label>
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            <TabList ref="tablist" tabs={this.state.tabs} itemClickHandler={this.itemClickHandler}/>
+          </div>
+        </header>
+        <div className="container">
+          <div className="row">
+            <div className="col s12">
+              <TabList ref="tablist" tabs={this.state.tabs} itemClickHandler={this.itemClickHandler}/>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     );
     /*jshint ignore:end */
   }

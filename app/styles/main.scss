@@ -57,8 +57,27 @@ main {
   flex: 1 0 auto;
 }
 
+header {
+  // show box shadow
+  position: relative;
+  z-index: 1;
+  // styles
+  background-color: $primary-color;
+  padding-top: 20px;
+
+  > .container > .row {
+    margin-bottom: 0;
+  }
+
+  input {
+    @extend .white-text;
+    font-size: 18px;
+  }
+}
+
 .collection {
-  max-height: 300px;
+  max-height: 350px;
+  margin-top: 0;
 
   .collection-item.avatar {
     min-height: initial;
@@ -94,9 +113,9 @@ main {
   }
 
   &.active {
-    strong {
+    b {
       font-weight: bold;
-      @extend .white-text;
+      // @extend .white-text;
     }
   }
 }
