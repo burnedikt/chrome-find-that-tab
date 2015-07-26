@@ -123,7 +123,7 @@ var OpenAnyTab = React.createClass({
       e.preventDefault();
       e.stopPropagation();
     }
-    helpers.switchToTab(this.state.tabs[this.state.activeTabIdx], helpers.closePopup);
+    helpers.switchToTab(this.state.tabs[this.state.activeTabIdx]).then(helpers.closePopup);
   },
   loadTabs: function() {
     return helpers.loadTabs().then(function(tabs) {

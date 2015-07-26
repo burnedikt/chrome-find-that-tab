@@ -32,19 +32,22 @@ function replacer(char) {
 
 module.exports = function(chrome) {
   return {
-    switchToTab: function(tab, cb) {
-      // make sure cb function is a function ...
-      if (typeof cb !== 'function') {
-        cb = function(){};
-      }
+    /**
+     * switchtes to the specified tab, then executes the callback function afterwards
+     * @param  {chrome.tabs.Tab}   tab the tab to be selected / highlighted
+     * @return {Promise}           a promise resolved as soon as the switch is done
+     */
+    switchToTab: function(tab) {
+      var deferredTabSwitch = q.defer();
       chrome.tabs.highlight({
         windowId: tab.windowId,
         tabs: tab.index
       }, function(wndw) {
         chrome.windows.update(wndw.id, {
           focused: true
-        }, cb);
+        }, deferredTabSwitch.resolve);
       });
+      return deferredTabSwitch.promise;
     },
     loadTabs: function() {
       // create a deferred object using the q-library
