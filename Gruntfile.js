@@ -118,12 +118,15 @@ module.exports = function (grunt) {
         'test/spec/{,*/}*.js'
       ]
     },
-    mocha: {
-      all: {
+
+    mochaTest: {
+      test: {
         options: {
-          run: true,
-          urls: ['http://localhost:<%= connect.options.port %>/index.html']
-        }
+          reporter: 'spec',
+          quiet: false, // Optionally suppress output to standard out (defaults to false)
+          clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+        },
+        src: ['test/**/*.js']
       }
     },
 
@@ -321,6 +324,11 @@ module.exports = function (grunt) {
         files: {
           'app/scripts/browserify.js': ['app/scripts/popup.js'],
         }
+      },
+      test: {
+        files: {
+          '.tmp/scripts/helpers.js': ['app/scripts/helpers.js'],
+        }
       }
     }
   });
@@ -335,8 +343,8 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'connect:test',
-    'mocha'
+    'browserify:test',
+    'mochaTest'
   ]);
 
   grunt.registerTask('build', [
