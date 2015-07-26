@@ -138,6 +138,7 @@ module.exports = function(chrome) {
           regExpMatch = tabs[i][attributes[ii]].match(regex);
           // if we have a match, store the regex, else discard it
           if (regExpMatch) {
+            regExpMatch._type = attributes[ii];
             regExpMatches.push(regExpMatch);
             // highlight any matches
             tabs[i]['highlighted-' + attributes[ii]] = highglightMatches(regExpMatch);
@@ -168,9 +169,9 @@ module.exports = function(chrome) {
         // loop over all matches and compare their matched lengths
         var aLength = 0, bLength = 0;
         for (var i = a._regExpMatches.length - 1; i >= 0; i--) {
-          aLength += a._regExpMatches[i][0].length * weights[i];
+          aLength += a._regExpMatches[i][0].length * weights[a._regExpMatches[i]._type];
           if (b._regExpMatches[i]) {
-            bLength += b._regExpMatches[i][0].length * weights[i];
+            bLength += b._regExpMatches[i][0].length * weights[b._regExpMatches[i]._type];
           }
         }
         var firstComparator = aLength - bLength;
@@ -179,9 +180,9 @@ module.exports = function(chrome) {
           // loop over all matches and compare their matched indizes
           var aIndex = 0, bIndex = 0;
           for (var j = a._regExpMatches.length - 1; j >= 0; j--) {
-            aIndex += a._regExpMatches[j].index * weights[i];
+            aIndex += a._regExpMatches[j].index * weights[a._regExpMatches[j]._type];
             if (b._regExpMatches[i]) {
-              bIndex += b._regExpMatches[j].index * weights[i];
+              bIndex += b._regExpMatches[j].index * weights[b._regExpMatches[j]._type];
             }
           }
           var comparator = aIndex - bIndex;
