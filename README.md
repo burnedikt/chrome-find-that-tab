@@ -26,7 +26,7 @@ Simply run `grunt test`.
 
 ## Building
 
-Simply run `grunt build`.
+Simply run `NODE_ENV=production grunt build`.
 
 ## Roadmap
 
