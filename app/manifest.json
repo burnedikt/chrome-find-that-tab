@@ -1,12 +1,15 @@
 {
   "manifest_version": 2,
   "name": "__MSG_appName__",
-  "version": "0.5.13",
+  "version": "1.0.0",
   "author": "Benedikt Reiser",
   "description": "__MSG_appDescription__",
   "icons": {
     "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "128": "images/icon-128.png",
+    "256": "images/icon-256.png",
+    "512": "images/icon-512.png",
+    "1024": "images/icon-1024.png"
   },
   "default_locale": "en",
   "browser_action": {
@@ -26,7 +29,7 @@
         "default": "Ctrl+Shift+P",
         "mac": "Command+Shift+P"
       },
-      "description": "Open AnyTab"
+      "description": "Find That Tab"
     }
   },
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
