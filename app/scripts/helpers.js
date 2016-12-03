@@ -100,6 +100,13 @@ module.exports = function(chrome) {
 
       // find all tabs and resolve the promise when done
       chrome.tabs.query(queryInfo, function(tabs) {
+        // filter the tabs to ignore the popup itself if it is in there
+        tabs = tabs.filter(function(tab) {
+          if (tab.title !== 'Find That Tab') {
+            return true;
+          }
+          return false;
+        });
         deferred.resolve(tabs);
       });
 
