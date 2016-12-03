@@ -20,7 +20,7 @@ function closePopup() {
 }
 var i = 0;
 chrome.commands.onCommand.addListener(function(command) {
-  if (command === 'open-anytab') {
+  if (command === 'popup-find-that-tab') {
     if (openedPopup) {
       chrome.windows.update(openedPopup.id, {
         focused: true

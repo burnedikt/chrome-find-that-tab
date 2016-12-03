@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_appName__",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "author": "Benedikt Reiser",
   "description": "__MSG_appDescription__",
   "icons": {
@@ -18,13 +18,12 @@
   },
   "background": {
     "scripts": [
-      "scripts/chromereload.js",
       "scripts/background.js"
     ],
     "persistent": false
   },
   "commands": {
-    "open-anytab": {
+    "popup-find-that-tab": {
       "suggested_key": {
         "default": "Ctrl+Shift+P",
         "mac": "Command+Shift+P"

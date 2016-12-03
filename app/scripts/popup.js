@@ -45,7 +45,7 @@ var Tab = React.createClass({
       tab: true,
       'collection-item': true,
       avatar: true,
-      active: this.props.data.selected,
+      active: this.props.data._selected,
     });
     /*jshint ignore:start */
     return (
@@ -207,7 +207,7 @@ var FindThatTab = React.createClass({
     var deferred = q.defer();
     // make sure to unhighlight all tabs
     newTabs.forEach(function(t) {
-      t.selected = false;
+      t._selected = false;
     });
     this.setState({
       tabs: newTabs
@@ -230,9 +230,9 @@ var FindThatTab = React.createClass({
     // get a reference to the currently stored tab list
     var _tabs = this.state.tabs;
     // unhighlight the currently active / highlighted tab
-    _tabs[this.state.activeTabIdx].selected = false;
+    _tabs[this.state.activeTabIdx]._selected = false;
     // highlight the newly selected one
-    _tabs[idx].selected = true;
+    _tabs[idx]._selected = true;
     // update the state with the new data
     // store the newly selected index
     this.setState({
