@@ -67,7 +67,7 @@ module.exports = function(chrome) {
       }
       // consolidate results for all attributes
       // we can use the index attribute to match the tabs
-      let matches = [];
+      var matches = [];
       // performa fuzzy search for all attributes
       for (var j = attributes.length - 1; j >= 0; j--) {
         var options = { 
@@ -80,9 +80,9 @@ module.exports = function(chrome) {
         var results = fuzzy.filter(keyword, tabs, options);
         // consolidate matches by adding up score (with some factor)
         for (var i = 0; i < results.length; i++) {
-          let res = results[i];
+          var res = results[i];
           // check if there is already an entry for this match in the matches list
-          let match = matches.find(function(m) {
+          var match = matches.find(function(m) {
             return m.index === res.index;
           });
           // match is new
