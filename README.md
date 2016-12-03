@@ -3,6 +3,9 @@
 > Reduce tab clutter and be more productive by getting to the tab you're
 > looking for with just a few keystrokes
 
+> Quickly find any tab with the Chrome Extension "Open AnyTab" - inspired by
+> Sublime's awesome "Open Anything" (Ctrl/Cmd + P) functionality.
+
 Source code of the Chrome Extension "Open Anytab" inspired by Sublime's Open 
 Anything functionality.
 

@@ -289,7 +289,7 @@ var FindThatTab = React.createClass({
             </div>
           </div>
         </header>
-        <div className="container">
+        <div className="container tab-list-container">
           <div className="row">
             <div className="col s12">
               <TabList ref="tablist" tabs={this.state.tabs} itemClickHandler={this.itemClickHandler}/>

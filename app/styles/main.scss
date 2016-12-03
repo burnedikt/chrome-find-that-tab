@@ -22,14 +22,9 @@ $faviconSize: 16px;
 // actual styles
 body {
   overflow: hidden;
-  display: flex;
+  display: block;
   min-height: 600px;
   min-width: 600px;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
 }
 
 header {
@@ -48,6 +43,10 @@ header {
     @extend .white-text;
     font-size: 18px;
   }
+}
+
+.tab-list-container > .row {
+  margin-bottom: 10px;
 }
 
 .collection {
