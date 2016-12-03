@@ -270,6 +270,23 @@ module.exports = function (grunt) {
             '*.{eot,svg,woff,woff2,ttf,ijmap}'
           ]
         }]
+      },
+      'libs': {
+        files: [{
+          expand: true,
+          cwd: '<%= config.root %>/node_modules/materialize-css/dist/js',
+          dest: '<%= config.app %>/libs',
+          src: [
+            'materialize.js'
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= config.root %>/node_modules/jquery/dist',
+          dest: '<%= config.app %>/libs',
+          src: [
+            'jquery.js'
+          ]
+        }]
       }
     },
 
@@ -341,6 +358,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'jshint',
       'copy:debug-fonts',
+      'copy:libs',
       'concurrent:chrome',
       'connect:chrome',
       'watch'
@@ -354,12 +372,14 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'chromeManifest:dist',
+    'copy:libs',
     'concurrent:dist',
     'useminPrepare',
     'cssmin',
     'concat',
     'uglify',
     'copy',
+    'copy:dist-fonts',
     'usemin',
     'compress'
   ]);

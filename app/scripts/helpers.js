@@ -200,6 +200,13 @@ module.exports = function(chrome) {
     /**
      * helper function to close the popup
      */
-    closePopup: chrome.extension.getBackgroundPage().closePopup
+    closePopup: function () {
+      const bgPage = chrome.extension.getBackgroundPage();
+      if (bgPage) {
+        return bgPage.closePopup();
+      } else {
+        return null;
+      }
+    }
   };
 };

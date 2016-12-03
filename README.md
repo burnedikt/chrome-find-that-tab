@@ -11,8 +11,7 @@ Anything functionality.
 
 ## Setup
 
-Make sure to run `bower install && npm install` before starting to contribute 
-to this extension.
+Make sure to run `npm install` before starting to contribute to this extension.
 
 ## Developing
 

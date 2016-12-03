@@ -4,9 +4,6 @@
 const classNames = require('classnames');
 // helpers
 const helpers = require('./helpers')(chrome);
-// jQuery for Materialize
-const jQuery = require('jquery');
-const Materialize = require('../../node_modules/materialize-css/js/materialize.js'); 
 // ReactJS for Rendering
 // jshint unused:false
 const React = require('react');
