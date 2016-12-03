@@ -137,7 +137,7 @@ var FindThatTab = React.createClass({
       document.body.addEventListener('keydown', this.keydownHandler);
     }.bind(this));
     // find the actual dom node of the tab list
-    this._tablistDOMNode = this.refs.tablist;
+    this._tablistDOMNode = ReactDom.findDOMNode(this.refs.tablist);
   },
   /**
    * handler function for any keydown event
