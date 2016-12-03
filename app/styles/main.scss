@@ -1,55 +1,30 @@
 // load materialize
 @charset "UTF-8";
 
+// material design icons
+@import "iconfont";
+
 // Mixins
-@import "materialize/sass/components/prefixer";
-@import "materialize/sass/components/mixins";
-@import "materialize/sass/components/color";
+// @import "materialize-css/sass/components/prefixer";
+@import "materialize-css/sass/components/mixins";
+@import "materialize-css/sass/components/color";
 
 // get local variables
 @import "variables";
 // get global variables
-@import "materialize/sass/components/variables";
+@import "materialize-css/sass/components/variables";
 
-// Reset
-@import "materialize/sass/components/normalize";
-
-// components
-@import "materialize/sass/components/global";
-@import "materialize/sass/components/icons-material-design";
-@import "materialize/sass/components/grid";
-@import "materialize/sass/components/navbar";
-@import "materialize/sass/components/roboto";
-@import "materialize/sass/components/typography";
-@import "materialize/sass/components/cards";
-@import "materialize/sass/components/toast";
-@import "materialize/sass/components/tabs";
-@import "materialize/sass/components/tooltip";
-@import "materialize/sass/components/buttons";
-@import "materialize/sass/components/dropdown";
-@import "materialize/sass/components/waves";
-@import "materialize/sass/components/modal";
-@import "materialize/sass/components/collapsible";
-@import "materialize/sass/components/materialbox";
-@import "materialize/sass/components/form";
-@import "materialize/sass/components/table_of_contents";
-@import "materialize/sass/components/sideNav";
-@import "materialize/sass/components/preloader";
-@import "materialize/sass/components/slider";
-@import "materialize/sass/components/date_picker/default.scss";
-@import "materialize/sass/components/date_picker/default.date.scss";
-@import "materialize/sass/components/date_picker/default.time.scss";
+@import "materialize-css/sass/materialize";
 
 // Variables
 $faviconSize: 16px;
 
 // actual styles
-
 body {
   overflow: hidden;
   display: flex;
-  min-height: 100vh;
-  min-width: 100vh;
+  min-height: 600px;
+  min-width: 600px;
   flex-direction: column;
 }
 
@@ -117,10 +92,21 @@ header {
     font-weight: bold;
   }
 
-  &.active {
+  // hide icons per default
+  .secondary-content {
+    display: none;
+    visibility: hidden;
+  }
+
+  &.active, &:hover {
     b {
       font-weight: bold;
       // @extend .white-text;
+    }
+
+    .secondary-content {
+      display: block;
+      visibility: visible;
     }
   }
 
@@ -143,4 +129,8 @@ header {
       }
     }
   }
+}
+
+#information {
+  padding-bottom: 20px;
 }

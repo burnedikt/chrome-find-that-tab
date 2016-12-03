@@ -16,9 +16,11 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   // Configurable paths
+  console.log(__dirname);
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist',
+    root: __dirname
   };
 
   grunt.initConfig({
@@ -28,10 +30,6 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['bower.json'],
-        tasks: ['bowerInstall']
-      },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js', '!<%= config.app %>/scripts/browserify.js'],
         tasks: ['jshint', 'browserify'],
@@ -130,25 +128,16 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the HTML file
-    bowerInstall: {
-      app: {
-        src: [
-          '<%= config.app %>/*.html'
-        ]
-      }
-    },
-
     sass: {
       options: {
         sourceMap: true,
         includePaths: [
-          '<%= config.app %>/bower_components'
+          '<%= config.root %>/node_modules'
         ]
       },
       server: {
         files: {
-          '<%= config.app %>/styles/main.css': '<%= config.app %>/styles/main.scss'
+          '<%= config.app %>/main.css': '<%= config.app %>/styles/main.scss'
         }
       }
     },
@@ -261,6 +250,26 @@ module.exports = function (grunt) {
             '_locales/{,*/}*.json',
           ]
         }]
+      },
+      'debug-fonts': {
+        files: [{
+          expand: true,
+          cwd: '<%= config.root %>/node_modules/material-design-icons/iconfont',
+          dest: '<%= config.app %>/iconfont',
+          src: [
+            '*.{eot,svg,woff,woff2,ttf,ijmap}'
+          ]
+        }]
+      },
+      'dist-fonts': {
+        files: [{
+          expand: true,
+          cwd: '<%= config.root %>/node_modules/material-design-icons/iconfont',
+          dest: '<%= config.dist %>/iconfont',
+          src: [
+            '*.{eot,svg,woff,woff2,ttf,ijmap}'
+          ]
+        }]
       }
     },
 
@@ -322,7 +331,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'app/scripts/browserify.js': ['app/scripts/popup.js'],
+          'app/bundle.js': ['app/scripts/popup.js'],
         }
       }
     }
@@ -331,6 +340,7 @@ module.exports = function (grunt) {
   grunt.registerTask('debug', function () {
     grunt.task.run([
       'jshint',
+      'copy:debug-fonts',
       'concurrent:chrome',
       'connect:chrome',
       'watch'

@@ -4,9 +4,9 @@
   <title>Tab TypeAhead'r</title>
   <!--Import materialize.css-->
   <!-- build:css main.css -->
-  <link type="text/css" rel="stylesheet" href="styles/main.css" />
+  <link type="text/css" rel="stylesheet" href="main.css" />
   <!-- endbuild -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
   <!-- build:js analytics.js -->
   <script type="text/javascript" src="scripts/analytics.js"></script>
   <!-- endbuild -->
@@ -16,9 +16,8 @@
     <div id="output">
       <!-- Page Content goes here -->
     </div>
-    <div class="container">
+    <div class="container" id="information">
       <div class="row">
-
         <div class="col s4 offset-s2">
           <div class="center promo promo-example">
             <i class="material-icons small">swap_vert</i>
@@ -27,19 +26,15 @@
         </div>
         <div class="col s4">
           <div class="center promo promo-example">
-            <i class="material-icons small">launch</i>
-            <p class="light center">Use return to switch to the selected tab.</p>
+            <i class="material-icons small">open_in_browser</i>
+            <p class="light center">Use return to jump to the selected tab</p>
           </div>
         </div>
-
       </div>
     </div>
   </main>
-  <!--Import jQuery before materialize.js-->
   <!-- build:js app.js -->
-  <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-  <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.js"></script>
-  <script src="scripts/browserify.js"></script>
+  <script src="bundle.js"></script>
   <!-- endbuild -->
 </body>
 </html>

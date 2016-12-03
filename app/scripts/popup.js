@@ -1,14 +1,18 @@
 'use strict';
 
 // classnames
-var classNames = require('classnames');
+const classNames = require('classnames');
 // helpers
-var helpers = require('./helpers.js')(chrome);
+const helpers = require('./helpers')(chrome);
+// jQuery for Materialize
+const jQuery = require('jquery');
+const Materialize = require('../../node_modules/materialize-css/js/materialize.js'); 
 // ReactJS for Rendering
 // jshint unused:false
-var React = require('../bower_components/react/react.min.js');
+const React = require('react');
+const ReactDom = require('react-dom');
 // promises baby
-var q = require('q');
+const q = require('q');
 
 ///////////////////////////////////
 // Key codes for various buttons //
@@ -91,7 +95,7 @@ var TabList = React.createClass({
 });
 
 /** React Element for the input field / typeahead */
-var OpenAnyTabInput = React.createClass({
+var FindThatTabInput = React.createClass({
   /**
    * handler function for any input in the input field, will trigger filtering the tabs by forwarding the event 
    * to the parent element
@@ -110,7 +114,7 @@ var OpenAnyTabInput = React.createClass({
 });
 
 /** React Element - Main Element containing all other elements */
-var OpenAnyTab = React.createClass({
+var FindThatTab = React.createClass({
   /**
    * @return {Object} Initial component state
    */
@@ -133,7 +137,7 @@ var OpenAnyTab = React.createClass({
       document.body.addEventListener('keydown', this.keydownHandler);
     }.bind(this));
     // find the actual dom node of the tab list
-    this._tablistDOMNode = this.refs.tablist.getDOMNode();
+    this._tablistDOMNode = this.refs.tablist;
   },
   /**
    * handler function for any keydown event
@@ -157,7 +161,7 @@ var OpenAnyTab = React.createClass({
     }
   },
   /**
-   * handler function for submit events on the openanytab form
+   * handler function for submit events on the FindThatTab form
    * triggers a switch to the currently selected element
    * @param  {Event} e the submit event
    */
@@ -277,7 +281,7 @@ var OpenAnyTab = React.createClass({
                 <div className="row">
                   <div className="input-field col s12">
                     <i className="material-icons prefix">search</i>
-                    <OpenAnyTabInput onInputChange={this.inputChangeHandler} />
+                    <FindThatTabInput onInputChange={this.inputChangeHandler} />
                     <label htmlFor="tabTypeAheadInput">Just type ahead ...</label>
                   </div>
                 </div>
@@ -310,8 +314,8 @@ var searchableData = [];
 document.addEventListener('DOMContentLoaded', function() {
   /*jshint ignore:start */
   // render the whole shit
-  React.render(
-    <OpenAnyTab />,
+  ReactDom.render(
+    <FindThatTab />,
     document.getElementById('output')
   );
   /*jshint ignore:end */
