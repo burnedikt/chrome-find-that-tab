@@ -1,13 +1,11 @@
 # Find That Tab
 
-> Reduce tab clutter and be more productive by getting to the tab you're
-> looking for with just a few keystrokes
+> Find that tab you're looking for with just a few keystrokes, 
+> reduce tab clutter and be more productive
 
-> Quickly find any tab with the Chrome Extension "Open AnyTab" - inspired by
-> Sublime's awesome "Open Anything" (Ctrl/Cmd + P) functionality.
-
-Source code of the Chrome Extension "Open Anytab" inspired by Sublime's Open 
-Anything functionality.
+Source code of the Chrome Extension "Find That Tab". Allows you to jump to
+the tab you're looking for in a heartbeat by swiftly searching through your open 
+tabs with just a few keystrokes. Inspired by Sublime Text's Open Anything functionality.
 
 ## Setup
 
@@ -22,9 +20,7 @@ in detail [here](https://developer.chrome.com/extensions/getstarted#unpacked)
 
 ## Testing
 
-Right now, there are no really useful tests. Just some experiments with
-filtering tabs based on a fuzzy search using [Fuse](https://github.com/krisk/Fuse)
-or my own RegEx-based search.
+Right now, there are no really useful tests.
 
 Simply run `grunt test`.
 
@@ -44,5 +40,5 @@ There is a bunch of features that can be added in the future, e.g.:
 
 Credits go to:
 
+- [Matt York](https://github.com/mattyork) and his awesome [fuzzy search library](https://github.com/mattyork/fuzzy)
 - the excellent [MaterializeCSS Library](http://materializecss.com/icons.html)
-- the Chrome / Chromium Developer Team
