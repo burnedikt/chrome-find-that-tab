@@ -45,7 +45,7 @@ var Tab = React.createClass({
       tab: true,
       'collection-item': true,
       avatar: true,
-      active: this.props.data._active,
+      active: this.props.data.selected,
     });
     /*jshint ignore:start */
     return (
@@ -118,7 +118,7 @@ var FindThatTab = React.createClass({
   getInitialState: function() {
     return {
       tabs: [],
-      _tabs: [],
+      originalTabs: [],
       activeTabIdx: 0
     };
   },
@@ -178,7 +178,7 @@ var FindThatTab = React.createClass({
     return helpers.loadTabs().then(function(tabs) {
       // store initial tabs and current tabs
       this.setState({
-        _tabs: tabs,
+        originalTabs: tabs,
         tabs: tabs
       });
       // highlight first tab per default
@@ -191,7 +191,7 @@ var FindThatTab = React.createClass({
    * @param  {String} keyword the contents of the input field
    */
   inputChangeHandler: function(keyword) {
-    var tabs = helpers.findMatchingTabs(keyword, this.state._tabs);
+    var tabs = helpers.findMatchingTabs(keyword, this.state.originalTabs);
     // set the tabs
     this._updateTabs(tabs).then(function() {
       // highlight first tab per default
@@ -205,6 +205,10 @@ var FindThatTab = React.createClass({
    */
   _updateTabs: function(newTabs) {
     var deferred = q.defer();
+    // make sure to unhighlight all tabs
+    newTabs.forEach(function(t) {
+      t.selected = false;
+    });
     this.setState({
       tabs: newTabs
     }, deferred.resolve);
@@ -226,9 +230,9 @@ var FindThatTab = React.createClass({
     // get a reference to the currently stored tab list
     var _tabs = this.state.tabs;
     // unhighlight the currently active / highlighted tab
-    _tabs[this.state.activeTabIdx]._active = false;
+    _tabs[this.state.activeTabIdx].selected = false;
     // highlight the newly selected one
-    _tabs[idx]._active = true;
+    _tabs[idx].selected = true;
     // update the state with the new data
     // store the newly selected index
     this.setState({
