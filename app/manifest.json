@@ -29,7 +29,7 @@
         "default": "Ctrl+Shift+P",
         "mac": "Command+Shift+P"
       },
-      "description": "Find That Tab"
+      "description": "Find That Tab Popup (faster than \"Activate the extension\")"
     }
   },
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
